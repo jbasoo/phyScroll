@@ -43,7 +43,7 @@
                     return time;
                 }
                 function scrollToPosition(position, time) {
-                    $(options.scrollingElements).delay(options.delay).animate({
+                    $(options.scrollingElements).animate({
                         scrollTop: position
                     }, {
                         duration: time,
@@ -54,17 +54,19 @@
                     });
                 }
                 if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
-                    var target = $(this.hash);
-                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                    if (target.length) {
-                        var targetPosition = target.offset().top - options.offset;
-                        var duration = getScrollDuration(targetPosition);
-                        if(duration > options.maxDuration){
-                            duration = options.maxDuration;
+                    setTimeout(function(){
+                        var target = $(this.hash);
+                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                        if (target.length) {
+                            var targetPosition = target.offset().top - options.offset;
+                            var duration = getScrollDuration(targetPosition);
+                            if(duration > options.maxDuration){
+                                duration = options.maxDuration;
+                            }
+                            scrollToPosition(targetPosition, duration);
+                            return false;
                         }
-                        scrollToPosition(targetPosition, duration);
-                        return false;
-                    }
+                    }, options.delay);
                 }
             });
         }
