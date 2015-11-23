@@ -54,10 +54,10 @@
                     });
                 }
                 if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
-                    setTimeout(function(){
-                        var target = $(this.hash);
-                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                        if (target.length) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        setTimeout(function(){
                             var targetPosition = target.offset().top - options.offset;
                             var duration = getScrollDuration(targetPosition);
                             if(duration > options.maxDuration){
@@ -65,8 +65,8 @@
                             }
                             scrollToPosition(targetPosition, duration);
                             return false;
-                        }
-                    }, options.delay);
+                        }, options.delay);
+                    }
                 }
             });
         }
