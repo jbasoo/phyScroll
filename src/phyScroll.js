@@ -25,6 +25,7 @@
             easing: 'swing',
             maxDuration: 2000,
             delay: 0,
+            offset: 0,
             start: $.noop,
             complete: $.noop,
             fail: $.noop,
@@ -56,7 +57,7 @@
                     var target = $(this.hash);
                     target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                     if (target.length) {
-                        var targetPosition = target.offset().top;
+                        var targetPosition = target.offset().top - options.offset;
                         var duration = getScrollDuration(targetPosition);
                         if(duration > options.maxDuration){
                             duration = options.maxDuration;
