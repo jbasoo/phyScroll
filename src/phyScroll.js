@@ -24,6 +24,7 @@
             speed: 5,
             easing: 'swing',
             maxDuration: 2000,
+            delay: 0,
             start: $.noop,
             complete: $.noop,
             fail: $.noop,
@@ -41,7 +42,7 @@
                     return time;
                 }
                 function scrollToPosition(position, time) {
-                    $(options.scrollingElements).animate({
+                    $(options.scrollingElements).delay(options.delay).animate({
                         scrollTop: position
                     }, {
                         duration: time,
