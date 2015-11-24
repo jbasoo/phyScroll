@@ -26,7 +26,7 @@
             maxDuration: 2000,
             delay: 0,
             offset: 0,
-            enquire: $.noop,
+            enquire: '',
             start: $.noop,
             complete: $.noop,
             fail: $.noop,
@@ -66,7 +66,16 @@
                             if(duration > options.maxDuration){
                                 duration = options.maxDuration;
                             }
-                            scroll(targetPosition, duration);
+                            if(options.enquire === ''){
+                                scroll(targetPosition, duration);
+                            }
+                            else {
+                                enquire.register(options.enquire, {
+                                    match : function() {
+                                        scroll(targetPosition, duration);
+                                    }
+                                });
+                            }
                         }, options.delay);
                         return false;
                     }
