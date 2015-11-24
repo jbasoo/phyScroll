@@ -26,6 +26,7 @@
             maxDuration: 2000,
             delay: 0,
             offset: 0,
+            enquire: $.noop,
             start: $.noop,
             complete: $.noop,
             fail: $.noop,
@@ -33,26 +34,28 @@
 
         var options = $.extend(defaults, _options);
 
+        function getScrollDuration(targetPosition) {
+            var currentPosition = $(window).scrollTop();
+            var distance = Math.abs(currentPosition - targetPosition);
+            var speed = options.speed;
+            var time = distance / speed;
+            return time;
+        }
+
+        function scrollToPosition(position, time) {
+            $(options.scrollingElements).animate({
+                scrollTop: position
+            }, {
+                duration: time,
+                easing: options.easing,
+                start: options.start,
+                complete: options.complete,
+                fail: options.fail
+            });
+        }
+
         function scroll(scroller){
             $(scroller).click(function() {
-                function getScrollDuration(targetPosition) {
-                    var currentPosition = $(window).scrollTop();
-                    var distance = Math.abs(currentPosition - targetPosition);
-                    var speed = options.speed;
-                    var time = distance / speed;
-                    return time;
-                }
-                function scrollToPosition(position, time) {
-                    $(options.scrollingElements).animate({
-                        scrollTop: position
-                    }, {
-                        duration: time,
-                        easing: options.easing,
-                        start: options.start,
-                        complete: options.complete,
-                        fail: options.fail
-                    });
-                }
                 if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
                     var target = $(this.hash);
                     target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
