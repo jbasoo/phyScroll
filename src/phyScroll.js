@@ -34,15 +34,15 @@
 
         var options = $.extend(defaults, _options);
 
-        function getScrollDuration(targetPosition) {
-            var currentPosition = $(window).scrollTop();
+        function getDuration(targetPosition) {
+            var currentPosition = $(options.scrollingElements).scrollTop();
             var distance = Math.abs(currentPosition - targetPosition);
             var speed = options.speed;
             var time = distance / speed;
             return time;
         }
 
-        function scrollToPosition(position, time) {
+        function scroll(position, time) {
             $(options.scrollingElements).animate({
                 scrollTop: position
             }, {
@@ -54,19 +54,19 @@
             });
         }
 
-        function scroll(scroller){
-            $(scroller).click(function() {
+        function init(trigger){
+            $(trigger).click(function() {
                 if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
                     var target = $(this.hash);
                     target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                     if (target.length) {
                         setTimeout(function(){
                             var targetPosition = target.offset().top - options.offset;
-                            var duration = getScrollDuration(targetPosition);
+                            var duration = getDuration(targetPosition);
                             if(duration > options.maxDuration){
                                 duration = options.maxDuration;
                             }
-                            scrollToPosition(targetPosition, duration);
+                            scroll(targetPosition, duration);
                         }, options.delay);
                         return false;
                     }
@@ -75,8 +75,7 @@
         }
 
         $(this).each(function(){
-            var scroller = $(this);
-            scroll(scroller);
+            init($(this));
         });
 
         return this;
