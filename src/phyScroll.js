@@ -64,8 +64,8 @@
                                 duration = options.maxDuration;
                             }
                             scrollToPosition(targetPosition, duration);
-                            return false;
                         }, options.delay);
+                        return false;
                     }
                 }
             });
