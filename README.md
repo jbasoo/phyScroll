@@ -3,12 +3,12 @@ A more physically realistic smooth scroll plugin. Time taken to travel to the ta
 
 Initialise without options:
 ```
-$('[data-physcroll]').phyScroll();
+$('a[href*="#"]:not([href="#"])').phyScroll();
 ````
 
 Initialise with options:
 ```
-$('[data-physcroll]').phyScroll({
+$('a[href*="#"]:not([href="#"])').phyScroll({
     speed: 5,
     easing: 'swing',
     maxDuration: 2000,
