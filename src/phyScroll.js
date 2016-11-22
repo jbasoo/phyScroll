@@ -1,6 +1,6 @@
 // the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
-;( function( $, window, document, undefined ) {
+;( function( $ ) {
 
 	"use strict";
 
@@ -115,7 +115,7 @@
 
 		// A really lightweight plugin wrapper around the constructor,
 		// preventing against multiple instantiations
-		$.fn[ pluginName ] = function( options ) {
+		$.fn.phyScroll = function( options ) {
 			return this.each( function() {
 				if ( !$.data( this, "plugin_" + pluginName ) ) {
 					$.data( this, "plugin_" +
@@ -124,4 +124,4 @@
 			} );
 		};
 
-} )( jQuery, window, document );
+} )( jQuery );
